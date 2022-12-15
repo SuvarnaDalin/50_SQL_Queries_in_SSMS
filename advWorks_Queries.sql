@@ -1,7 +1,10 @@
+-----------------------------------------------------------------------------------------------------------------------------------
+------------------------------------- 50 SQL QUERIES ON ADVENTUREWORKS2019 DATABASE -----------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
+
 -- 1. From the following table write a query in SQL to retrieve all rows and columns from the employee table in the Adventureworks 
 -- database. Sort the result set in ascending order on jobtitle.
 -- Sample table: HumanResources.Employee
-
 select * from HumanResources.Employee
 order by JobTitle;
 
@@ -36,7 +39,6 @@ order by Name;
 select so.SalesOrderID, so.CustomerID, so.OrderDate, so.SubTotal, so.TaxAmt/so.SubTotal*100 as tax_percentage
 from Sales.SalesOrderHeader as so
 order by SubTotal desc;
-
 
 -- 6. From the following table write a query in SQL to create a list of unique jobtitles in the employee table in Adventureworks 
 -- database. Return jobtitle column and arranged the resultset in ascending order.
@@ -78,13 +80,11 @@ group by ProductID
 having sum(Quantity) > 500
 order by ProductID;
 
-
 -- 10. From the following table write a query in SQL to find the total quantity for a group of locationid multiplied by 10.  
 -- Sample table: production.productinventory
 select sum(Quantity) as Total_Quantity
 from Production.ProductInventory
 group by (LocationID*10);
-
 
 -- 11. From the following tables write a query in SQL to find the persons whose last name starts with letter 'L'. 
 -- Return BusinessEntityID, FirstName, LastName, and PhoneNumber. Sort the result on lastname and firstname.  
@@ -94,7 +94,6 @@ from Person.Person as p join Person.PersonPhone as ph
 on (p.BusinessEntityID = ph.BusinessEntityID)
 where LastName like 'L%'
 order by Lastname, FirstName;
-
 
 -- 12. From the following table write a query in SQL to find the sum of subtotal column. Group the sum on distinct salespersonid 
 -- and customerid. Rolls up the results into subtotal and running total. Return salespersonid, customerid and sum of subtotal 
@@ -128,7 +127,7 @@ group by grouping sets (LocationID, ());
 
 -- 16. From the following table write a query in SQL to retrieve the number of employees for each City. Return city and number of employees. 
 -- Sort the result in ascending order on city.
--- Sample table: Person.BusinessEntityAddress
+-- Sample table: Person.BusinessEntityAddress, Person.Address
 select pa.City, count(pb.BusinessEntityID) as Emp_Count
 from Person.BusinessEntityAddress as pb join Person.Address as pa
 on (pa.AddressID = pb.AddressID)
@@ -165,7 +164,7 @@ order by ContactTypeID desc;
 
 -- 20. From the following tables write a query in SQL to make a list of contacts who are designated as 'Purchasing Manager'. 
 -- Return BusinessEntityID, LastName, and FirstName columns. Sort the result set in ascending order of LastName, and FirstName.  
--- Sample table: Person.BusinessEntityContact
+-- Sample table: Person.BusinessEntityContact, Person.ContactType
 select pbe.BusinessEntityID, pp.LastName, pp.FirstName
 from Person.Person as pp join Person.BusinessEntityContact as pbe on (pp.BusinessEntityID = pbe.PersonID)
 						 join Person.ContactType as pct on (pbe.ContactTypeID = pct.ContactTypeID)
@@ -225,7 +224,6 @@ order by Full_Name;
 -- 25. From the following table write a query in SQL to find the sum, average, count, minimum, and maximum order quantity for those orders 
 -- whose id are 43659 and 43664. Return SalesOrderID, ProductID, OrderQty, sum, average, count, max, and min order quantity.  
 -- Sample table: Sales.SalesOrderDetail
-
 select SalesOrderID, ProductID, OrderQty, 
 sum(OrderQty) over (partition by SalesOrderID) as Tot_Qty, 
 avg(OrderQty) over (partition by SalesOrderID) as Avg_Qty, 
@@ -476,10 +474,5 @@ select top 20 JobTitle, HireDate
 from HumanResources.Employee
 order by HireDate desc;
 
-
-
-
-
-
-
-
+-----------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
