@@ -1,0 +1,3 @@
+The Adventureworks2019 database can be downloaded from official Microsoft Github page link shown below:
+
+https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorks2019.bak
